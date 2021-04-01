@@ -319,21 +319,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XBe-cB-nIP">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBe-cB-nIP">
                                 <rect key="frame" x="16" y="124" width="382" height="706"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pe7-n3-PBM">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="320"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="320" id="N9d-5i-WdB"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fD0-7F-WZy">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="334"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upl-2u-oDG" customClass="RoundedCornerButton" customModule="SimplifierApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="382" height="50"/>
+                                        <rect key="frame" x="0.0" y="335" width="382" height="39"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                        <state key="normal" title="Button">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="1y4-wc-PnN"/>
+                                        </constraints>
+                                        <state key="normal" title="Simplify text">
                                             <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -345,15 +347,17 @@
                                             <action selector="simplifyButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="LzR-SZ-lwD"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Simplified text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-pi-9Ox">
-                                        <rect key="frame" x="0.0" y="386" width="382" height="320"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Simplified text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c8m-7A-LZR">
+                                        <rect key="frame" x="0.0" y="375" width="382" height="331"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="331" id="NaG-Hq-QAL"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="a1A-pi-9Ox" firstAttribute="height" secondItem="pe7-n3-PBM" secondAttribute="height" id="179-Dc-pSQ"/>
-                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWo-LT-avg">
                                 <rect key="frame" x="16" y="52" width="56" height="55"/>
@@ -390,13 +394,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="defaultTextField" destination="pe7-n3-PBM" id="hVy-93-nIi"/>
-                        <outlet property="simplifiedTextField" destination="a1A-pi-9Ox" id="1hK-ye-o6w"/>
+                        <outlet property="defaultTextField" destination="fD0-7F-WZy" id="Z8F-87-0pF"/>
+                        <outlet property="simplifiedTextField" destination="c8m-7A-LZR" id="7fk-cX-eXu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMj-l4-NlR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2465" y="68"/>
+            <point key="canvasLocation" x="2462.3188405797105" y="67.633928571428569"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="Jfh-2c-qQU">
@@ -490,7 +494,7 @@
             <size key="intrinsicContentSize" width="54" height="30"/>
         </designable>
         <designable name="Upl-2u-oDG">
-            <size key="intrinsicContentSize" width="46" height="30"/>
+            <size key="intrinsicContentSize" width="85" height="30"/>
         </designable>
         <designable name="Wpq-oD-W7s">
             <size key="intrinsicContentSize" width="54" height="30"/>
@@ -505,6 +509,9 @@
     <resources>
         <image name="bookmark.circle" catalog="system" width="128" height="121"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
