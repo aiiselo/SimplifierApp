@@ -358,6 +358,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWo-LT-avg">
                                 <rect key="frame" x="16" y="52" width="56" height="55"/>
@@ -381,6 +382,17 @@
                                 <connections>
                                     <action selector="settingsButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="Sd0-gS-VML"/>
                                     <segue destination="HNb-5W-o05" kind="show" id="GuO-sS-i5f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVI-Qm-KOt">
+                                <rect key="frame" x="351" y="135" width="38" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                <state key="normal" backgroundImage="camera" catalog="system">
+                                    <color key="titleColor" systemColor="systemOrangeColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="fAM-2k-M7C"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -508,6 +520,7 @@
     </designables>
     <resources>
         <image name="bookmark.circle" catalog="system" width="128" height="121"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
