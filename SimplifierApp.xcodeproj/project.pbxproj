@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0E0F2F26489FB800DC719A /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E0F2E26489FB800DC719A /* DetailVC.swift */; };
 		0A4094DE25F023C40046CCB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4094DD25F023C40046CCB9 /* AppDelegate.swift */; };
 		0A4094E025F023C40046CCB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4094DF25F023C40046CCB9 /* SceneDelegate.swift */; };
 		0A4094E225F023C40046CCB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4094E125F023C40046CCB9 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0E0F2E26489FB800DC719A /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		0A4094DA25F023C40046CCB9 /* SimplifierApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplifierApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4094DD25F023C40046CCB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A4094DF25F023C40046CCB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				0AF4E31A25F4E405002591A4 /* RoundedCornerButton.swift */,
 				0AF4E31D25F50F52002591A4 /* BookmarksViewController.swift */,
 				0AF4E32025F50F60002591A4 /* SettingsViewController.swift */,
+				0A0E0F2E26489FB800DC719A /* DetailVC.swift */,
 			);
 			path = SimplifierApp;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			files = (
 				0AF4E31E25F50F52002591A4 /* BookmarksViewController.swift in Sources */,
 				0AF4E2F925F4D021002591A4 /* AuthViewController.swift in Sources */,
+				0A0E0F2F26489FB800DC719A /* DetailVC.swift in Sources */,
 				0AF4E30225F4D07A002591A4 /* MainPageViewController.swift in Sources */,
 				0AF4E32125F50F60002591A4 /* SettingsViewController.swift in Sources */,
 				0AF4E31B25F4E405002591A4 /* RoundedCornerButton.swift in Sources */,

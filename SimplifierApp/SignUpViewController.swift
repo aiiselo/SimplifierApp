@@ -84,6 +84,20 @@ class SignUpViewController: UIViewController {
                             self.appearAlert()
                         }
                     }
+                    let ref = Database.database().reference(fromURL: "https://textsimplifier-default-rtdb.firebaseio.com/")
+                    let usersReference = ref.child("users").child(result!.user.uid)
+                    let values = [
+                        "email": self.emailTextField.text!,
+                        "name" : "Somename"
+                    ]
+                    usersReference.updateChildValues(values, withCompletionBlock: {
+                        (error, ref) in
+                        if error != nil {
+                            print(error)
+                            return
+                        }
+                    })
+                    
                 }
             }
         }

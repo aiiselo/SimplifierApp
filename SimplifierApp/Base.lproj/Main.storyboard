@@ -41,9 +41,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGN-7F-Gqf" customClass="RoundedCornerButton" customModule="SimplifierApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="56" width="382" height="48"/>
                                         <state key="normal" title="Sign In">
-                                            <color key="titleColor" systemColor="systemOrangeColor"/>
+                                            <color key="titleColor" red="0.99740141630000001" green="0.5885465741" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
-                                        <state key="selected" title="Sign In">
+                                        <state key="selected">
                                             <color key="titleColor" systemColor="systemOrangeColor"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -54,7 +54,7 @@
                                                 <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" systemColor="systemOrangeColor"/>
+                                                <color key="value" red="0.99740141630000001" green="0.5885465741" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -262,54 +262,69 @@
             </objects>
             <point key="canvasLocation" x="1651" y="419"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="Ype-Ut-gbF">
+        <!--Bookmarks View Controller-->
+        <scene sceneID="9i6-WW-dNq">
             <objects>
-                <tableViewController id="v8J-fm-cbA" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ioc-xT-gwm">
+                <viewController id="L04-RB-qwH" customClass="BookmarksViewController" customModule="SimplifierApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qzL-m8-uGn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c8n-mf-1Tz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o2d-z7-llu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Bookmarks" id="otP-28-OsP">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gAn-FW-C2W">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gAn-FW-C2W" id="lUE-9M-TBu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZJi-d9-Qcy">
-                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZJi-d9-Qcy" id="bYl-NG-FVC">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JcA-cv-CEM">
-                                        <rect key="frame" x="0.0" y="115" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JcA-cv-CEM" id="ekY-Wf-Iiq">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="v8J-fm-cbA" id="SFW-aI-B2c"/>
-                            <outlet property="delegate" destination="v8J-fm-cbA" id="1se-Tr-PQ1"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="fhM-Wr-iXy"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t7U-uH-LzQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8XV-HI-lEb"/>
+                    <connections>
+                        <segue destination="Zga-1g-h9Y" kind="show" identifier="showdetail" id="RYY-bj-Aml"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WaW-5H-I8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3370" y="-344"/>
+            <point key="canvasLocation" x="3292.753623188406" y="-339.50892857142856"/>
+        </scene>
+        <!--DetailVC-->
+        <scene sceneID="wM3-2L-qOi">
+            <objects>
+                <viewController id="Zga-1g-h9Y" customClass="DetailVC" customModule="SimplifierApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xoy-9p-Wgd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VP4-KZ-jOl">
+                                <rect key="frame" x="20" y="63" width="374" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lFV-Kw-GWp">
+                                <rect key="frame" x="20" y="354" width="374" height="253"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eCn-zb-YFa"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.94901960780000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qLb-zy-nd6"/>
+                    <connections>
+                        <outlet property="defaultText" destination="VP4-KZ-jOl" id="eHq-xr-oz1"/>
+                        <outlet property="simplifiedText" destination="lFV-Kw-GWp" id="ccs-5e-Z6z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k3U-as-sOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4163.768115942029" y="-327.45535714285711"/>
         </scene>
         <!--Main Page View Controller-->
         <scene sceneID="APF-np-YUa">
@@ -322,7 +337,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBe-cB-nIP">
                                 <rect key="frame" x="16" y="124" width="382" height="706"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fD0-7F-WZy">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fD0-7F-WZy">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="334"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
@@ -347,7 +362,7 @@
                                             <action selector="simplifyButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="LzR-SZ-lwD"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Simplified text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c8m-7A-LZR">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c8m-7A-LZR">
                                         <rect key="frame" x="0.0" y="375" width="382" height="331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -361,21 +376,21 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWo-LT-avg">
-                                <rect key="frame" x="16" y="52" width="56" height="55"/>
+                                <rect key="frame" x="305" y="75.5" width="38" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                <color key="tintColor" systemColor="systemGray3Color"/>
                                 <state key="normal" backgroundImage="bookmark.circle" catalog="system">
-                                    <color key="titleColor" systemColor="systemOrangeColor"/>
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="bookmarksButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="Irb-vm-KIz"/>
-                                    <segue destination="v8J-fm-cbA" kind="show" id="nQM-Mx-tmI"/>
+                                    <segue destination="L04-RB-qwH" kind="show" id="iuS-e1-hlb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-0F-aTh">
-                                <rect key="frame" x="342" y="51.5" width="56" height="55"/>
+                                <rect key="frame" x="351" y="75" width="38" height="37.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                <color key="tintColor" systemColor="systemGray3Color"/>
                                 <state key="normal" backgroundImage="gearshape.fill" catalog="system">
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
                                 </state>
@@ -387,12 +402,30 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVI-Qm-KOt">
                                 <rect key="frame" x="351" y="135" width="38" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                <color key="tintColor" red="0.99740141630000001" green="0.5885465741" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" backgroundImage="camera" catalog="system">
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
                                 </state>
                                 <connections>
                                     <action selector="cameraButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="fAM-2k-M7C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9h-hM-rSl">
+                                <rect key="frame" x="358" y="511" width="31" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.99607843137254903" green="0.5885465741" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" backgroundImage="bookmark" catalog="system"/>
+                                <connections>
+                                    <action selector="addToBookmarksButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="PmT-qr-P5f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYw-xH-l1H">
+                                <rect key="frame" x="351" y="133" width="37" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.99607843137254903" green="0.5885465741" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" backgroundImage="clear" catalog="system"/>
+                                <connections>
+                                    <action selector="clearTextButtonPressed:" destination="lgg-2c-lTi" eventType="touchUpInside" id="rXb-h6-Op1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -406,8 +439,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addToBookMarksButton" destination="l9h-hM-rSl" id="VfW-gL-Oak"/>
+                        <outlet property="clearTextButton" destination="nYw-xH-l1H" id="DDr-RJ-Zth"/>
                         <outlet property="defaultTextField" destination="fD0-7F-WZy" id="Z8F-87-0pF"/>
                         <outlet property="simplifiedTextField" destination="c8m-7A-LZR" id="7fk-cX-eXu"/>
+                        <outlet property="takePhotoButton" destination="mVI-Qm-KOt" id="qf5-be-5Na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMj-l4-NlR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -519,14 +555,19 @@
         </designable>
     </designables>
     <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.circle" catalog="system" width="128" height="121"/>
         <image name="camera" catalog="system" width="128" height="94"/>
+        <image name="clear" catalog="system" width="128" height="114"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
