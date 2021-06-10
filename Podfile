@@ -8,7 +8,7 @@ target 'SimplifierApp' do
   # Pods for SimplifierApp
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
-pod 'Firebase/Firestore'
 pod 'Firebase/Database'
+pod 'Firebase/Firestore'
 
 end

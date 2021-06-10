@@ -14,6 +14,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     
     let user = Auth.auth().currentUser
     var textImage = UIImage()
+    var latestUUID: String = ""
     
     @IBOutlet weak var addToBookMarksButton: UIButton!
     @IBOutlet weak var defaultTextField: UITextView!
@@ -30,10 +31,22 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         defaultTextField.textColor = UIColor.lightGray
         defaultTextField.delegate = self
         defaultTextField.returnKeyType = .done
+        defaultTextField.layer.cornerRadius = 6
+        defaultTextField.layer.borderWidth = 0
+        defaultTextField.layer.borderColor = UIColor(hexString: "#FE9600").cgColor
+        defaultTextField.textContainerInset.left = 8
+        defaultTextField.textContainerInset.top = 12
+        defaultTextField.textContainerInset.right = 32
         
         simplifiedTextField.text = "Simplified text"
         simplifiedTextField.textColor = UIColor.lightGray
         simplifiedTextField.delegate = self
+        simplifiedTextField.layer.cornerRadius = 6
+        simplifiedTextField.layer.borderWidth = 0
+        simplifiedTextField.layer.borderColor = UIColor(hexString: "#FE9600").cgColor
+        simplifiedTextField.textContainerInset.left = 8
+        simplifiedTextField.textContainerInset.top = 12
+        simplifiedTextField.textContainerInset.right = 32
         
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
@@ -54,6 +67,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func simplifyButtonPressed(_ sender: Any) {
         if defaultTextField.text != nil && defaultTextField.text != "Your text" && defaultTextField.text != "" {
+            simplifiedTextField.text = "Loading . . ."
             let url = URL(string: "https://test-simplifier.herokuapp.com/simplify")
             guard let requestUrl = url else { fatalError() }
             var request = URLRequest(url: requestUrl)
@@ -94,6 +108,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         else {
             addToBookMarksButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: UIControl.State.normal)
+            deleteSimplification()
         }
     }
     
@@ -124,7 +139,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
             let text = observations.compactMap({
                 $0.topCandidates(1).first?.string
             }).joined(separator: ", ")
-            print(text)
+            self.defaultTextField.textColor = UIColor.black
             self.defaultTextField.text = text
         }
         do {
@@ -139,13 +154,20 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         if defaultTextField.text != nil && simplifiedTextField.text != nil {
             if let user = user {
                 let uid = user.uid
+                let today = Date()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm E, d MMM y"
                 let ref = Database.database().reference(fromURL: "https://textsimplifier-default-rtdb.firebaseio.com/")
-                let usersReference = ref.child("users").child(uid).child("favourites")
-                let values = [defaultTextField.text! : simplifiedTextField.text!]
+                self.latestUUID = UUID().uuidString
+                let usersReference = ref.child("users").child(uid).child("favourites").child(latestUUID)
+                let values = [
+                    "preview_text": defaultTextField.text!,
+                    "simplified_text": simplifiedTextField.text!,
+                    "date": formatter.string(from: today)
+                ] as [String : Any]
                 usersReference.updateChildValues(values, withCompletionBlock: {
                     (error, ref) in
                     if error != nil {
-                        print(error)
                         return
                     }
                 })
@@ -154,7 +176,12 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func deleteSimplification(){
-        
+        if let user = user {
+            let uid = user.uid
+            let ref = Database.database().reference(fromURL: "https://textsimplifier-default-rtdb.firebaseio.com/")
+            let usersReference = ref.child("users").child(uid).child("favourites").child(latestUUID)
+            usersReference.removeValue()
+        }
     }
     
     // MARK: -UIImagePickerDelegates
@@ -164,14 +191,13 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
             self.textImage = pickedImage
             recognizeText(image: pickedImage)
         }
-        print("ImageTaken")
         picker.dismiss(animated: true, completion: nil)
-        
     }
     
     // MARK: - UITextViewDelegates
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.layer.borderWidth = 2
         if textView.text == "Your text" {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -181,6 +207,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        defaultTextField.layer.borderWidth = 0
         if textView.text == "" {
             textView.text = "Your text"
             textView.textColor = UIColor.lightGray
@@ -202,3 +229,4 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         return true
     }
 }
+
