@@ -14,7 +14,6 @@
 		0A4094E725F023C60046CCB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A4094E625F023C60046CCB9 /* Assets.xcassets */; };
 		0A4094EA25F023C60046CCB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A4094E825F023C60046CCB9 /* LaunchScreen.storyboard */; };
 		0A40950925F4C50D0046CCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A40950825F4C50D0046CCB9 /* GoogleService-Info.plist */; };
-		0A961A54267162C00011ABA0 /* someViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A961A53267162C00011ABA0 /* someViewController.swift */; };
 		0AF4E2F925F4D021002591A4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4E2F825F4D021002591A4 /* AuthViewController.swift */; };
 		0AF4E2FC25F4D03E002591A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4E2FB25F4D03E002591A4 /* SignUpViewController.swift */; };
 		0AF4E2FF25F4D04A002591A4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4E2FE25F4D04A002591A4 /* LogInViewController.swift */; };
@@ -35,7 +34,6 @@
 		0A4094E925F023C60046CCB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A4094EB25F023C60046CCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A40950825F4C50D0046CCB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0A961A53267162C00011ABA0 /* someViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = someViewController.swift; sourceTree = "<group>"; };
 		0AF4E2F825F4D021002591A4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0AF4E2FB25F4D03E002591A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0AF4E2FE25F4D04A002591A4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 				0AF4E31D25F50F52002591A4 /* BookmarksViewController.swift */,
 				0AF4E32025F50F60002591A4 /* SettingsViewController.swift */,
 				0A0E0F2E26489FB800DC719A /* DetailedViewController.swift */,
-				0A961A53267162C00011ABA0 /* someViewController.swift */,
 			);
 			path = SimplifierApp;
 			sourceTree = "<group>";
@@ -240,7 +237,6 @@
 				0AF4E32125F50F60002591A4 /* SettingsViewController.swift in Sources */,
 				0AF4E31B25F4E405002591A4 /* RoundedCornerButton.swift in Sources */,
 				0AF4E2FF25F4D04A002591A4 /* LogInViewController.swift in Sources */,
-				0A961A54267162C00011ABA0 /* someViewController.swift in Sources */,
 				0A4094DE25F023C40046CCB9 /* AppDelegate.swift in Sources */,
 				0AF4E2FC25F4D03E002591A4 /* SignUpViewController.swift in Sources */,
 				0A4094E025F023C40046CCB9 /* SceneDelegate.swift in Sources */,

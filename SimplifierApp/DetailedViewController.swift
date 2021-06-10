@@ -66,20 +66,22 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func saveChangesButtonPressed(_ sender: Any) {
-        let usersReference = ref.child("users").child(self.user!.uid).child("favourites").child((self.note?.uuid)!)
-        let values = [
-            "preview_text": defaultText.text!,
-            "simplified_text": simplifiedText.text!,
-        ] as [String : Any]
-        usersReference.updateChildValues(values, withCompletionBlock: {
-            (error, ref) in
-            if error != nil {
-                return
-            }
-            else {
-                NotificationCenter.default.post(name: .didUpdateBookmark, object: nil)
-            }
-        })
+        if defaultText.text != nil && simplifiedText.text != nil && defaultText.text != "" && simplifiedText.text != "" {
+            let usersReference = ref.child("users").child(self.user!.uid).child("favourites").child((self.note?.uuid)!)
+            let values = [
+                "preview_text": defaultText.text!,
+                "simplified_text": simplifiedText.text!,
+            ] as [String : Any]
+            usersReference.updateChildValues(values, withCompletionBlock: {
+                (error, ref) in
+                if error != nil {
+                    return
+                }
+                else {
+                    NotificationCenter.default.post(name: .didUpdateBookmark, object: nil)
+                }
+            })
+        }
     }
     
 }

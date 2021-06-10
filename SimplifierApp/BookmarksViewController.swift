@@ -44,54 +44,19 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateListOfBookmarks()
         
-//        ref.child("users").child(self.user!.uid).child("favourites").getData{
-//            (error, snapshot) in
-//                if let error = error {
-//                        print("Error getting data \(error)")
-//                    }
-//                else if snapshot.exists() {
-//                    if let snapshotValue = snapshot.value {
-//                        for (uuid, dictionary) in snapshotValue as! Dictionary<String, Dictionary<String, String>> {
-//                            self.favourites.append(Bookmarks(
-//                                                    uuid: uuid,
-//                                                    previewText: dictionary["preview_text"]!,
-//                                                    simpleText: dictionary["simplified_text"]!,
-//                                                    date: dictionary["date"]!))
-//                        }
-//                    }
-//                }
-//        }
-//        self.tableView.reloadData()
-        
-//        ref.child("users").child(self.user!.uid).observeSingleEvent(of: .value, with: { (snapshotChild) in
-//                   if snapshotChild.hasChild("favourites"){
-//                    self.ref.child("users").child(self.user!.uid).child("favourites").observeSingleEvent(of: .value, with: {(snapshot) in
-//                            if let snapshotValue = snapshot.value {
-//                                for (uuid, dictionary) in snapshotValue as! Dictionary<String, Dictionary<String, String>>{
-//                                    self.favourites.append(Bookmarks(uuid: uuid, previewText: dictionary["preview_text"]!, simpleText: dictionary["simplified_text"]!, date: dictionary["date"]!))
-//                                }
-//                                self.tableView.reloadData()
-//                            }
-//                        })
-//                }})
         NotificationCenter.default.addObserver(self, selector: #selector(updateListOfBookmarks), name: .didUpdateBookmark, object: nil)
-
+        
         self.tableView = UITableView(frame: view.bounds, style: .plain)
         self.tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: identifier)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
         view.addSubview(tableView)
+        updateListOfBookmarks()
         
     }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//    }
     
     @objc func updateListOfBookmarks() {
         var newFavourites: [Bookmarks] = []
@@ -99,7 +64,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             (error, snapshot) in
                 if let error = error {
                         print("Error getting data \(error)")
-                    }
+                }
                 else if snapshot.exists() {
                     if let snapshotValue = snapshot.value {
                         for (uuid, dictionary) in snapshotValue as! Dictionary<String, Dictionary<String, String>> {
@@ -110,11 +75,13 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                                                     date: dictionary["date"]!))
                         }
                         self.favourites = newFavourites
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
         }
     }
-                            
     
     //MARK: - UITableViewDelegate
     
@@ -147,11 +114,12 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
    func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let deleteAction = UIContextualAction(style: .destructive, title: "delete") {
             (_, _, _) in
+            let favUUID = self.favourites[indexPath.row].uuid!
             self.favourites.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             if let user = self.user {
                 let usersReference = self.ref.child("users").child(user.uid).child("favourites")
-                usersReference.child(self.favourites[indexPath.row].uuid!).removeValue()
+                usersReference.child(favUUID).removeValue()
             }
         }
         return deleteAction
