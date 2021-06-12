@@ -35,17 +35,22 @@ class SubtitleTableViewCell: UITableViewCell {
 }
 
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-       
-    var tableView = UITableView()
     let identifier = "CELL_ID"
+    var favourites: [Bookmarks] = []
+    
+    var tableView = UITableView()
+   
     let user = Auth.auth().currentUser
     let ref = Database.database().reference(fromURL: "https://textsimplifier-default-rtdb.firebaseio.com/")
-    var favourites: [Bookmarks] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateListOfBookmarks), name: .didUpdateBookmark, object: nil)
+        
+        let name = Notification.Name("darkModeHasChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(switchTheme), name: name, object: nil)
         
         self.tableView = UITableView(frame: view.bounds, style: .plain)
         self.tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: identifier)
@@ -56,41 +61,57 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         view.addSubview(tableView)
         updateListOfBookmarks()
         
+        switchTheme()
+        
     }
+    
+    @objc func switchTheme() {
+        let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+        let currentTheme = isLightMode ? Theme.light : Theme.dark
+        view.backgroundColor = currentTheme.backgroundColor
+        tableView.backgroundColor = currentTheme.backgroundColor
+        tableView.tintColor = currentTheme.textColor
+        tableView.reloadData()
+    }
+    
     
     @objc func updateListOfBookmarks() {
         var newFavourites: [Bookmarks] = []
-        self.ref.child("users").child(self.user!.uid).child("favourites").getData{
-            (error, snapshot) in
-                if let error = error {
-                        print("Error getting data \(error)")
-                }
-                else if snapshot.exists() {
-                    if let snapshotValue = snapshot.value {
-                        for (uuid, dictionary) in snapshotValue as! Dictionary<String, Dictionary<String, String>> {
-                            newFavourites.append(Bookmarks(
-                                                    uuid: uuid,
-                                                    previewText: dictionary["preview_text"]!,
-                                                    simpleText: dictionary["simplified_text"]!,
-                                                    date: dictionary["date"]!))
-                        }
-                        self.favourites = newFavourites
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+        self.ref.child("users").child(self.user!.uid).child("favourites").getData{ (error, snapshot) in
+            if let error = error {
+                    print("Error getting data \(error)")
+            }
+            else if snapshot.exists() {
+                if let snapshotValue = snapshot.value {
+                    for (uuid, dictionary) in snapshotValue as! Dictionary<String, Dictionary<String, String>> {
+                        newFavourites.append(Bookmarks(
+                                                uuid: uuid,
+                                                previewText: dictionary["preview_text"]!,
+                                                simpleText: dictionary["simplified_text"]!,
+                                                date: dictionary["date"]!))
+                    }
+                    self.favourites = newFavourites
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
+            }
         }
     }
     
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+        let currentTheme = isLightMode ? Theme.light : Theme.dark
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         cell.textLabel?.text = self.favourites[indexPath.row].preview
         cell.detailTextLabel?.text = self.favourites[indexPath.row].date
+        cell.backgroundColor = currentTheme.textField
+        cell.textLabel?.textColor = currentTheme.textColor
+        cell.detailTextLabel?.textColor = currentTheme.textColor
         return cell
-        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favourites.count
@@ -130,7 +151,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             destination.note = favourites[(tableView.indexPathForSelectedRow?.row)!]
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

@@ -12,23 +12,26 @@ import Firebase
 
 class MainPageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
-    let user = Auth.auth().currentUser
-    var textImage = UIImage()
-    var latestUUID: String = ""
-    
     @IBOutlet weak var addToBookMarksButton: UIButton!
     @IBOutlet weak var defaultTextField: UITextView!
     @IBOutlet weak var simplifiedTextField: UITextView!
     @IBOutlet weak var clearTextButton: UIButton!
     @IBOutlet weak var takePhotoButton: UIButton!
     
+    let user = Auth.auth().currentUser
+    var textImage = UIImage()
+    var latestUUID: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let name = Notification.Name("darkModeHasChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(switchTheme), name: name, object: nil)
+        
         clearTextButton.isHidden = true
         addToBookMarksButton.isHidden = true
         
         defaultTextField.text = "Your text"
-        defaultTextField.textColor = UIColor.lightGray
         defaultTextField.delegate = self
         defaultTextField.returnKeyType = .done
         defaultTextField.layer.cornerRadius = 6
@@ -39,7 +42,6 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         defaultTextField.textContainerInset.right = 32
         
         simplifiedTextField.text = "Simplified text"
-        simplifiedTextField.textColor = UIColor.lightGray
         simplifiedTextField.delegate = self
         simplifiedTextField.layer.cornerRadius = 6
         simplifiedTextField.layer.borderWidth = 0
@@ -48,10 +50,35 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         simplifiedTextField.textContainerInset.top = 12
         simplifiedTextField.textContainerInset.right = 32
         
+        switchTheme()
+        
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     // MARK: - Button Actions
+    
+    @objc func switchTheme() {
+        let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+        let theme = isLightMode ? Theme.light : Theme.dark
+        view.backgroundColor = theme.backgroundColor
+        
+        if defaultTextField.text == "Your text"  {
+            defaultTextField.textColor = UIColor.lightGray
+        }
+        else {
+            defaultTextField.textColor = theme.textColor
+        }
+        
+        if simplifiedTextField.text == "Simplified text" {
+            simplifiedTextField.textColor = UIColor.lightGray
+        }
+        else {
+            simplifiedTextField.textColor = theme.textColor
+        }
+        
+        defaultTextField.backgroundColor = theme.textField
+        simplifiedTextField.backgroundColor = theme.textField
+    }
     
     @IBAction func clearTextButtonPressed(_ sender: Any) {
         if defaultTextField.isFirstResponder {
@@ -62,35 +89,38 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
             defaultTextField.textColor = UIColor.lightGray
             clearTextButton.isHidden = true
             takePhotoButton.isHidden = false
+            addToBookMarksButton.isHidden = true
         }
     }
     
     @IBAction func simplifyButtonPressed(_ sender: Any) {
         if defaultTextField.text != nil && defaultTextField.text != "Your text" && defaultTextField.text != "" {
             simplifiedTextField.text = "Loading . . ."
+            
             let url = URL(string: "https://test-simplifier.herokuapp.com/simplify")
             guard let requestUrl = url else { fatalError() }
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "POST"
             let postString = "text=\(defaultTextField.text!)";
             request.httpBody = postString.data(using: String.Encoding.utf8);
+            
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                    if let error = error {
-                        print("Error took place \(error)")
-                        return
+                if error != nil { return }
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    DispatchQueue.main.async {
+                        self.simplifiedTextField.text = dataString
+                        self.addToBookMarksButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: UIControl.State.normal)
+                        self.addToBookMarksButton.isHidden = false
+                        let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+                        let theme = isLightMode ? Theme.light : Theme.dark
+                        self.simplifiedTextField.textColor = theme.textColor
                     }
-                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                        print("Response data string:\n\(dataString)")
-                        DispatchQueue.main.async {
-                            self.simplifiedTextField.text = dataString
-                            self.addToBookMarksButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: UIControl.State.normal)
-                            self.addToBookMarksButton.isHidden = false
-                            self.simplifiedTextField.textColor = UIColor.black
-                        }
-                    }
+                }
             }
+            
             task.resume()
         }
+        
         if defaultTextField.text == "Your text" {
             simplifiedTextField.text = "Simplified text"
             simplifiedTextField.textColor = UIColor.lightGray
@@ -123,7 +153,6 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        
     }
     
     // MARK: - Other functions
@@ -135,11 +164,12 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
             guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
                 return
             }
-            
             let text = observations.compactMap({
                 $0.topCandidates(1).first?.string
             }).joined(separator: ", ")
-            self.defaultTextField.textColor = UIColor.black
+            let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+            let theme = isLightMode ? Theme.light : Theme.dark
+            self.defaultTextField.textColor = theme.textColor
             self.defaultTextField.text = text
         }
         do {
@@ -151,7 +181,7 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func saveSimplification(){
-        if defaultTextField.text != nil && simplifiedTextField.text != nil {
+        if defaultTextField.text != nil && simplifiedTextField.text != nil && defaultTextField.text != "Your text" {
             if let user = user {
                 let uid = user.uid
                 let today = Date()
@@ -200,7 +230,9 @@ class MainPageViewController: UIViewController, UIImagePickerControllerDelegate,
         textView.layer.borderWidth = 2
         if textView.text == "Your text" {
             textView.text = ""
-            textView.textColor = UIColor.black
+            let isLightMode = UserDefaults.standard.bool(forKey: "isLightMode")
+            let theme = isLightMode ? Theme.light : Theme.dark
+            textView.textColor = theme.textColor
             clearTextButton.isHidden = false
             takePhotoButton.isHidden = true
         }

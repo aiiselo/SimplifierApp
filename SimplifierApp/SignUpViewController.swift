@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var firstPasswordTextField: UITextField!
     @IBOutlet weak var secondPasswordTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
@@ -30,10 +31,7 @@ class SignUpViewController: UIViewController {
             if firstPasswordTextField.text != secondPasswordTextField.text {
                 return "Passwords don't match"
             }
-            else {
-                return nil
-                
-            }
+            else { return nil }
     }
     
     func appearAlert() {
@@ -48,6 +46,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let result = checkValidFields()
+        
         if result != nil {
             errorLabel.alpha = 1
             errorLabel.numberOfLines = 0
@@ -69,6 +68,7 @@ class SignUpViewController: UIViewController {
                 }
                 else {
                     self.errorLabel.alpha = 0
+                    
                     let db = Firestore.firestore()
                     db.collection("users").addDocument(data: [
                         "email": self.emailTextField.text!,
@@ -84,7 +84,9 @@ class SignUpViewController: UIViewController {
                             self.appearAlert()
                         }
                     }
+                    
                     let ref = Database.database().reference(fromURL: "https://textsimplifier-default-rtdb.firebaseio.com/")
+                    
                     let usersReference = ref.child("users").child(result!.user.uid)
                     let values = [
                         "email": self.emailTextField.text!,
@@ -92,19 +94,12 @@ class SignUpViewController: UIViewController {
                     ]
                     usersReference.updateChildValues(values, withCompletionBlock: {
                         (error, ref) in
-                        if error != nil {
-                            print(error)
-                            return
-                        }
+                            if error != nil {
+                                return
+                            }
                     })
-                    
                 }
             }
         }
     }
-    
-    
-    
-
 }
-
